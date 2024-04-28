@@ -5,9 +5,13 @@ using UnityEngine;
 
 public class Controller_Instantiator : MonoBehaviour
 {
-    public float timer=7;
+    public float enemiesTimer=7;
+
+    public float wallsTimer;
 
     public  List<GameObject> enemies;
+
+    public GameObject wall;
 
     public GameObject instantiatePos;
 
@@ -17,14 +21,16 @@ public class Controller_Instantiator : MonoBehaviour
 
     void Start()
     {
-        
+        wallsTimer = 1;
     }
 
     void Update()
     {
-        timer -= Time.deltaTime;
+        enemiesTimer -= Time.deltaTime;
+        wallsTimer -= Time.deltaTime;
         SpawnEnemies();
         ChangeVelocity();
+        SpawnWalls();
     }
 
     private void ChangeVelocity()
@@ -39,7 +45,7 @@ public class Controller_Instantiator : MonoBehaviour
 
     private void SpawnEnemies()
     {
-        if (timer <= 0)
+        if (enemiesTimer <= 0)
         {
             float offsetX = instantiatePos.transform.position.x;
             int rnd = UnityEngine.Random.Range(0, enemies.Count);
@@ -49,7 +55,16 @@ public class Controller_Instantiator : MonoBehaviour
                 Vector3 transform = new Vector3(offsetX, instantiatePos.transform.position.y, instantiatePos.transform.position.z);
                 Instantiate(enemies[rnd], transform,Quaternion.identity);
             }
-            timer = 7;
+            enemiesTimer = 7;
+        }
+    }
+
+    private void SpawnWalls()
+    {
+        if (wallsTimer <= 0)
+        {
+            Instantiate(wall, transform.position - new Vector3(50f,12f,0f),wall.transform.rotation);
+            wallsTimer = 5;
         }
     }
 }

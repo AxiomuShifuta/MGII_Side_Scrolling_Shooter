@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    public float xLimit = 30;
+    public float xLimit = 30; //No coincidía con el valor en el inspector, el cual figuraba en 20.
     public float yLimit = 20;
     
     virtual public void Update()

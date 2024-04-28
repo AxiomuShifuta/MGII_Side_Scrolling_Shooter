@@ -232,7 +232,8 @@ public class Controller_Player : MonoBehaviour
 
     public virtual void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Enemy")|| collision.gameObject.CompareTag("EnemyProjectile"))
+        if (collision.gameObject.CompareTag("Enemy")|| collision.gameObject.CompareTag("EnemyProjectile")
+         || collision.gameObject.CompareTag("Floor") || collision.gameObject.CompareTag("Ceiling"))
         {
             if (forceField)
             {
@@ -251,6 +252,23 @@ public class Controller_Player : MonoBehaviour
         {
             Destroy(collision.gameObject);
             powerUpCount++;
+        }
+    }
+    public void OnTriggerEnter(Collider collider)
+    {
+            if (collider.gameObject.CompareTag("Wall"))
+        {
+            if (forceField)
+            {
+                Destroy(collider.gameObject);
+                forceField = false;
+            }
+            else
+            {
+                gameObject.SetActive(false);
+                //Destroy(this.gameObject);
+                Controller_Hud.gameOver = true;
+            }
         }
     }
 }

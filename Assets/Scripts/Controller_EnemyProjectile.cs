@@ -10,7 +10,7 @@ public class Controller_EnemyProjectile : Projectile
 
     private Rigidbody rb;
 
-    public float enemyProjectileSpeed;
+    public float enemyProjectileSpeed; //Modificado de 10 a 5 desde el inspector del prefab de EnemyProyectile
 
     void Start()
     {
