@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 7181859360312436723}
   - component: {fileID: 4390870484048361809}
   - component: {fileID: 4313169750193823422}
+  - component: {fileID: -7716846233700995388}
   m_Layer: 0
-  m_Name: Cube
-  m_TagString: Untagged
+  m_Name: SneakerEnemy
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -105,3 +106,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-7716846233700995388
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7033175056175590953}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71aaa884b4523cb488cd2531816d211d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemySpeed: 0
+  xLimit: -35
+  enemyProjectile: {fileID: 0}
+  powerUp: {fileID: 0}
