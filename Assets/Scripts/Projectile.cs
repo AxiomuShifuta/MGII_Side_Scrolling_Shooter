@@ -14,11 +14,18 @@ public class Projectile : MonoBehaviour
 
     internal virtual void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Wall") || collision.gameObject.CompareTag("Floor"))
+        if (collision.gameObject.CompareTag("Floor"))
         {
             Destroy(this.gameObject);
         }
     }
+
+    private void OnTriggerEnter(Collider collider)
+    {
+            if(collider.gameObject.CompareTag("Wall"))
+            Destroy(this.gameObject);
+    }
+
 
     internal virtual void CheckLimits()
     {

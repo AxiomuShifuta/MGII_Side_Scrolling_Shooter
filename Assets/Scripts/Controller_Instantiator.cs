@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Controller_Instantiator : MonoBehaviour
 {
@@ -48,7 +49,7 @@ public class Controller_Instantiator : MonoBehaviour
         if (enemiesTimer <= 0)
         {
             float offsetX = instantiatePos.transform.position.x;
-            int rnd = UnityEngine.Random.Range(0, enemies.Count);
+            int rnd = Random.Range(0, enemies.Count);
             for (int i = 0; i < 5; i++)
             {
                 offsetX = offsetX + 4;
@@ -63,8 +64,21 @@ public class Controller_Instantiator : MonoBehaviour
     {
         if (wallsTimer <= 0)
         {
-            Instantiate(wall, transform.position - new Vector3(50f,12f,0f),wall.transform.rotation);
-            wallsTimer = 5;
+            
+            
+            if(Random.Range(1,3) == 1)
+            {
+                Instantiate(wall, transform.position - new Vector3(50f, 12f, 0f), wall.transform.rotation);
+                wallsTimer = 5;
+            }
+            else
+            {
+                Instantiate(wall, transform.position - new Vector3(50f, - 16f, 0f), wall.transform.rotation);
+                wallsTimer = 5;
+            }
+
+
+            
         }
     }
 }
