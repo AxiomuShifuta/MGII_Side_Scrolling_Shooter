@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4313169750193823422}
   - component: {fileID: 2658863103796957695}
   - component: {fileID: -7716846233700995388}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: SneakerEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -146,7 +146,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71aaa884b4523cb488cd2531816d211d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpeed: 20
+  enemySpeed: 30
   xLimit: -35
   enemyProjectile: {fileID: 2708450068394556265, guid: 79ea6a2f480704548a3396a2715e551b,
     type: 3}

@@ -9,7 +9,7 @@ public class Projectile : MonoBehaviour
     
     virtual public void Update()
     {
-        CheckLimits();
+       // CheckLimits();
     }
 
     internal virtual void OnCollisionEnter(Collision collision)

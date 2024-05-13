@@ -50,7 +50,7 @@ public class Controller_Instantiator : MonoBehaviour
         {
             float offsetX = instantiatePos.transform.position.x;
             int rnd = Random.Range(0, enemies.Count);
-
+          
             if (rnd == 3)
             { //Específico para SneakerEnemy
 

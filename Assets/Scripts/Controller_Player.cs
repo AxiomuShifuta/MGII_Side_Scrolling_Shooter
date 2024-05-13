@@ -38,6 +38,8 @@ public class Controller_Player : MonoBehaviour
     
     private void Awake()
     {
+        Time.timeScale = 1;
+
         if (_Player == null)
         {
             _Player = GameObject.FindObjectOfType<Controller_Player>();

@@ -7,6 +7,7 @@ public class SneakerEnemy : Controller_Enemy
     Rigidbody rb;
     public float stopPositionX;
     public float waitingTime;
+    bool shooted = false;
     
     // Start is called before the first frame update
     void Start()
@@ -44,14 +45,12 @@ public class SneakerEnemy : Controller_Enemy
 
     public override void ShootPlayer()
     {
-        if (transform.position.x == stopPositionX && Controller_Player._Player != null)
-        Instantiate(enemyProjectile, transform.position, Quaternion.identity);
-
-        /*No instancia el disparo. Sí lo hacía antes de crear este override.
-         El problema en ese entonces era que el proyectil se instanciaba
-        y quedaba por detrás del enemigo. Si el inconveniente fuese por 
-        las velocidades respectivas del enemigo y el proyectil, debería
-        ocurrir también con los demás enemigos, ya que todos se mueven
-        más rápido que sus proyectiles.*/
+        if (transform.position.x >= stopPositionX && Controller_Player._Player != null && shooted == false)
+        {
+            Instantiate(enemyProjectile, transform.position, Quaternion.identity);
+            shooted = true;
+        }
+      /*Cuando alcanza la posición de detención, se queda ahí dos segundos mientras lanza un disparo 
+       y vuelve por donde ingresó.*/
     }
 }

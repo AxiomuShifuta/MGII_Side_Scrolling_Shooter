@@ -21,7 +21,7 @@ public class Restart : MonoBehaviour
             Controller_Player._Player.gameObject.SetActive(true);
 
         }
-        Time.timeScale = 1;
+        
         /*Si corro esta variable acá, el restart funciona bien luego del Game Over.
          Sin embargo, además de no entender bien por qué, no me convence que quede
         independiente del if del input, porque implicaría que esa variable se asigna
