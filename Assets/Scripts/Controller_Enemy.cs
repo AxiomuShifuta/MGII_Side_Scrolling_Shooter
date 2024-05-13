@@ -27,7 +27,7 @@ public class Controller_Enemy : MonoBehaviour
         ShootPlayer();
     }
 
-    void ShootPlayer()
+    public virtual void ShootPlayer()
     {
         if (Controller_Player._Player != null)
         {
@@ -63,6 +63,12 @@ public class Controller_Enemy : MonoBehaviour
             Destroy(this.gameObject);
             Controller_Hud.points++;
         }
+    }
+
+    private void OnTriggerEnter(Collider collider)
+    {
+        if (collider.gameObject.CompareTag("Wall"))
+            Destroy (this.gameObject);
     }
 
     private void GeneratePowerUp()

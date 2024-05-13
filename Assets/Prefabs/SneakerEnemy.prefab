@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7181859360312436723}
   - component: {fileID: 4390870484048361809}
   - component: {fileID: 4313169750193823422}
+  - component: {fileID: 2658863103796957695}
   - component: {fileID: -7716846233700995388}
   m_Layer: 0
   m_Name: SneakerEnemy
@@ -106,6 +107,33 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &2658863103796957695
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7033175056175590953}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 124
+  m_CollisionDetection: 0
 --- !u!114 &-7716846233700995388
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -118,7 +146,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71aaa884b4523cb488cd2531816d211d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpeed: 0
+  enemySpeed: 20
   xLimit: -35
-  enemyProjectile: {fileID: 0}
-  powerUp: {fileID: 0}
+  enemyProjectile: {fileID: 2708450068394556265, guid: 79ea6a2f480704548a3396a2715e551b,
+    type: 3}
+  powerUp: {fileID: 4517337200887749597, guid: 6e4570f9333e45646a8605a1c5ac603e, type: 3}
+  stopPositionX: -16
+  waitingTime: 2

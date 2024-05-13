@@ -5,27 +5,53 @@ using UnityEngine;
 public class SneakerEnemy : Controller_Enemy
 {
     Rigidbody rb;
-    public float spawnTimer;
+    public float stopPositionX;
+    public float waitingTime;
+    
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        spawnTimer = 5f;
+        StartCoroutine(SneakerMovement());
     }
 
     // Update is called once per frame
-   override public void Update()
+
+
+    IEnumerator SneakerMovement()
     {
-        spawnTimer -= Time.deltaTime;
+        while (transform.position.x < stopPositionX)
+        {
+            rb.AddForce(new Vector3(enemySpeed * Time.deltaTime, 0, 0), ForceMode.VelocityChange);
+            /*En principio quise moverlo a través de rb.Velocity, pero no tenía ningún efecto.
+            Desconozco por qué*/
+            yield return null;
+        }
+
+        rb.velocity = Vector3.zero;
+        ShootPlayer();
+        yield return new WaitForSeconds(waitingTime);
+
+        while (transform.position.x > xLimit)
+        {
+            rb.AddForce(new Vector3( -enemySpeed * Time.deltaTime, 0, 0), ForceMode.VelocityChange);
+            yield return null;
+        }
+
+        /*La corrutina hace que el enemigo llegue hasta el punto de detención (cuyo valor se
+          especifica desde el inspector) para disparar, esperar dos segundos y retirarse.*/
     }
 
-    public void Spawn()
+    public override void ShootPlayer()
     {
-        if(spawnTimer >= 0)
-        {
-            if(Random.Range(0,5) == 1)
-            Instantiate(this, new Vector3(-30, 15, 0), Quaternion.identity);
-        }
-        spawnTimer = 5;
+        if (transform.position.x == stopPositionX && Controller_Player._Player != null)
+        Instantiate(enemyProjectile, transform.position, Quaternion.identity);
+
+        /*No instancia el disparo. Sí lo hacía antes de crear este override.
+         El problema en ese entonces era que el proyectil se instanciaba
+        y quedaba por detrás del enemigo. Si el inconveniente fuese por 
+        las velocidades respectivas del enemigo y el proyectil, debería
+        ocurrir también con los demás enemigos, ya que todos se mueven
+        más rápido que sus proyectiles.*/
     }
 }

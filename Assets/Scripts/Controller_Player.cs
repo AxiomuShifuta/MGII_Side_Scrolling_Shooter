@@ -177,10 +177,23 @@ public class Controller_Player : MonoBehaviour
             {
                 OptionListing();
             }
-            else if (powerUpCount >= 6)
+            else if (powerUpCount == 6)
             {
                 forceField = true;
                 powerUpCount = 0;
+            }
+            else if (powerUpCount >= 7)
+            {
+                GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+                foreach (GameObject enemy in enemies)
+                    GameObject.Destroy(enemy);
+                powerUpCount = 0;
+
+                /*Este es el power up agregado, que destruye a todos los enemigos instanciados.
+                 No me permitía hacerlo con la sintaxis "Destroy(gameObject.FindObjectsWithTag("Enemy"))",
+                 u otra similar, por lo que tomé lo que sugerían en un foro con la creación
+                de ese array de enemigos. Será que sí o sí hay que encapsularlos primero en 
+                una variable, para luego dárselo como argumento al Destroy.*/
             }
         }
     }

@@ -50,12 +50,28 @@ public class Controller_Instantiator : MonoBehaviour
         {
             float offsetX = instantiatePos.transform.position.x;
             int rnd = Random.Range(0, enemies.Count);
-            for (int i = 0; i < 5; i++)
-            {
-                offsetX = offsetX + 4;
-                Vector3 transform = new Vector3(offsetX, instantiatePos.transform.position.y, instantiatePos.transform.position.z);
-                Instantiate(enemies[rnd], transform,Quaternion.identity);
+
+            if (rnd == 3)
+            { //Específico para SneakerEnemy
+
+                offsetX = offsetX - 124;
+                float offsetY = instantiatePos.transform.position.y + 3;
+                // La idea de este enemigo es que haga spawn desde la izquierda de la pantalla y que sea solo uno.
+
+                Vector3 transform = new Vector3(offsetX, offsetY, instantiatePos.transform.position.z);
+                Instantiate(enemies[rnd], transform, Quaternion.identity);
+
             }
+            else
+            {
+                for (int i = 0; i < 5; i++)
+                {
+                    offsetX = offsetX + 4;
+                    Vector3 transform = new Vector3(offsetX, instantiatePos.transform.position.y, instantiatePos.transform.position.z);
+                    Instantiate(enemies[rnd], transform, Quaternion.identity);
+                }
+            }
+
             enemiesTimer = 7;
         }
     }
