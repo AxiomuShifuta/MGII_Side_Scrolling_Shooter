@@ -3,10 +3,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Audio;
 
 public class Restart : MonoBehaviour
 {
-    
+    public AudioMixerSnapshot startSnapshot;
+    public Controller_Player playerController;
+
+
+    private void Start()
+    {
+
+    }
+
+
     void Update()
     {
         GetInput();
@@ -17,7 +27,9 @@ public class Restart : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R))
         {
             
-            SceneManager.LoadScene(0);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            playerController.musicCount = 0;
+            startSnapshot.TransitionTo(0f); 
             Controller_Player._Player.gameObject.SetActive(true);
 
         }

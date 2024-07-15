@@ -17,7 +17,8 @@ public class Controller_Hud : MonoBehaviour
 
     private Controller_Player player;
 
-    void Start()
+
+    void Awake()
     {
         gameOver = false;
         gameOverText.gameObject.SetActive(false);
@@ -32,6 +33,7 @@ public class Controller_Hud : MonoBehaviour
             Time.timeScale = 0;
             gameOverText.text = "Game Over" ;
             gameOverText.gameObject.SetActive(true);
+            
         }
         if (player!=null)
         {

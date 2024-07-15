@@ -73,8 +73,8 @@ public class Controller_Enemy : MonoBehaviour
 
     private void GeneratePowerUp()
     {
-        int rnd = UnityEngine.Random.Range(0, 3);
-        if (rnd == 2)
+        int rnd = UnityEngine.Random.Range(0, 2);
+        if (rnd == 1)
         {
             Instantiate(powerUp, transform.position, Quaternion.identity);
         }

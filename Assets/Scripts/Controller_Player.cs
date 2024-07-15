@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class Controller_Player : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class Controller_Player : MonoBehaviour
     public GameObject laserProjectile;
     public GameObject option;
     public int powerUpCount=0;
+    public int musicCount=0;
 
     internal bool doubleShoot;
     internal bool missiles;
@@ -35,10 +37,21 @@ public class Controller_Player : MonoBehaviour
     private List<Controller_Option> options;
     
     public static Controller_Player _Player;
-    
+
+    public AudioMixerSnapshot startSnapshot;
+    public AudioMixerSnapshot PowUp1;
+    public AudioMixerSnapshot PowUp2;
+
+    public AudioSource basicShotSound;
+    public AudioSource laserSound;
+    public AudioSource activateLaserVoice;
+    public AudioSource gotPowerSound;
+    public AudioSource usedPowerSound;
     private void Awake()
     {
         Time.timeScale = 1;
+        powerUpCount = 0;
+        musicCount = 0;
 
         if (_Player == null)
         {
@@ -76,6 +89,7 @@ public class Controller_Player : MonoBehaviour
     {
         CheckForceField();
         ActionInput();
+        PowerUpMusic();
     }
 
     private void CheckForceField()
@@ -99,7 +113,7 @@ public class Controller_Player : MonoBehaviour
     {
         missileCount -= Time.deltaTime;
         shootingCount -= Time.deltaTime;
-        if (Input.GetKey(KeyCode.O) && shootingCount<0)
+        if (Input.GetKeyDown(KeyCode.O) && shootingCount<0)
         {
             if (OnShooting!=null)
             {
@@ -108,12 +122,14 @@ public class Controller_Player : MonoBehaviour
 
             if (laserOn)
             {
+                laserSound.Play();
                 laser = Instantiate(laserProjectile, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
                 laser.GetComponent<Controller_Laser>().parent = this.gameObject;
                 //laser.GetComponent<Controller_Laser>().relase = false;
             }
             else
-            {
+            { 
+                basicShotSound.Play();
                 Instantiate(projectile, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
                 if (doubleShoot)
                 {
@@ -148,48 +164,62 @@ public class Controller_Player : MonoBehaviour
         {
             if (powerUpCount == 1)
             {
+                usedPowerSound.Play();
                 speed *= 2;
                 powerUpCount = 0;
+                musicCount++;
             }
             else if(powerUpCount == 2)
             {
                 if (!missiles)
                 {
+                    usedPowerSound.Play();
                     missiles = true;
                     powerUpCount = 0;
+                    musicCount++;
                 }
             }
             else if (powerUpCount == 3)
             {
                 if (!doubleShoot)
                 {
+                    usedPowerSound.Play();
                     doubleShoot = true;
                     powerUpCount = 0;
+                    musicCount++;
                 }
             }
             else if (powerUpCount == 4)
             {
                 if (!laserOn)
                 {
+                    activateLaserVoice.Play();
                     laserOn = true;
                     powerUpCount = 0;
+                    musicCount++;
                 }
             }
             else if (powerUpCount == 5)
             {
+                usedPowerSound.Play();
                 OptionListing();
+                musicCount++;
             }
             else if (powerUpCount == 6)
             {
+                usedPowerSound.Play();
                 forceField = true;
                 powerUpCount = 0;
+                musicCount++;
             }
             else if (powerUpCount >= 7)
             {
+                usedPowerSound.Play();
                 GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
                 foreach (GameObject enemy in enemies)
                     GameObject.Destroy(enemy);
                 powerUpCount = 0;
+                musicCount++;
 
                 /*Este es el power up agregado, que destruye a todos los enemigos instanciados.
                  No me permitía hacerlo con la sintaxis "Destroy(gameObject.FindObjectsWithTag("Enemy"))",
@@ -265,6 +295,7 @@ public class Controller_Player : MonoBehaviour
 
         if (collision.gameObject.CompareTag("PowerUp"))
         {
+            gotPowerSound.Play();
             Destroy(collision.gameObject);
             powerUpCount++;
         }
@@ -284,6 +315,19 @@ public class Controller_Player : MonoBehaviour
                 //Destroy(this.gameObject);
                 Controller_Hud.gameOver = true;
             }
+        }
+    }
+
+    public void PowerUpMusic()
+    {
+        if(musicCount == 1)
+        {
+            PowUp1.TransitionTo(1f);
+        }
+
+        else if(musicCount >= 2) 
+        {
+            PowUp2.TransitionTo(1f);
         }
     }
 }
